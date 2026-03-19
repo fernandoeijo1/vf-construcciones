@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VF Construcciones — Brand Kit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
+
+        body {
+            background-color: #0F0F0F;
+            color: #E8E8E8;
+            line-height: 1.7;
+        }
+
+        .color-swatch {
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(77, 184, 199, 0.2);
+        }
+
+        .color-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 0.75rem;
+            letter-spacing: 0.025em;
+        }
+
+        .color-hex {
+            font-size: 0.8125rem;
+            color: #A8A098;
+            margin-top: 0.25rem;
+            font-family: 'Inter', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .copy-feedback {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background-color: #4DB8C7;
+            color: #1A1A1A;
+            padding: 0.875rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 50;
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
+        }
+
+        .typography-sample {
+            padding: 2rem;
+            background-color: #1A1A1A;
+            border: 1px solid #2D2D2D;
+            border-radius: 8px;
+            transition: border-color 0.2s ease;
+        }
+
+        .typography-sample:hover {
+            border-color: #4DB8C7;
+        }
+
+        .display-font {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        .body-font {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.025em;
+        }
+
+        .guideline-card {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+            border: 1px solid #2D2D2D;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .guideline-card:hover {
+            border-color: #4DB8C7;
+            background: linear-gradient(135deg, #1F1F1F 0%, #333333 100%);
+        }
+
+        .logo-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .logo-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #2D2D2D;
+            transition: border-color 0.2s ease;
+        }
+
+        .logo-display:hover {
+            border-color: #4DB8C7;
+        }
+
+        .logo-display.on-black {
+            background-color: #1A1A1A;
+        }
+
+        .logo-display.on-white {
+            background-color: #F5F5F5;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2D2D2D, transparent);
+            margin: 4rem 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.875rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            .logo-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .color-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+
+        .gradient-accent {
+            background: linear-gradient(135deg, #4DB8C7 0%, #5A8C3C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #4DB8C7;
+            font-weight: 600;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .accent-highlight {
+            color: #4DB8C7;
+        }
+    </style>
+</head>
+<body class="bg-gray-950">
+    <div id="copyFeedback" class="copy-feedback">Copied to clipboard!</div>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-b from-black to-gray-900 border-b border-gray-800 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-6 py-8 md:py-12">
+            <h1 class="text-white mb-2 gradient-accent">VF Construcciones</h1>
+            <p class="text-gray-400 text-lg tracking-wide">Brand Identity Guide</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+
+        <!-- Logo Section -->
+        <section class="mb-16">
+            <h2 class="text-white mb-8">Logo</h2>
+            <p class="text-gray-300 mb-8 max-w-3xl text-base leading-relaxed">Our logo features elegant serif typography in "VF" with "CONSTRUCCIONES" positioned underneath. The mark is designed for versatility across dark and light backgrounds with clear space requirements.</p>
+
+            <div class="logo-showcase">
+                <div class="logo-display on-black">
+                    <div class="text-center">
+                        <div style="width: 120px; height: 120px; background-color: #1A1A1A; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #FFFFFF; margin: 0 auto 1rem;">
+                            <span class="display-font text-white text-4xl">VF</span>
+                        </div>
+                        <p class="text-white text-xs tracking-widest font-medium">CONSTRUCCIONES</p>
+                        <p class="text-gray-500 text-xs mt-2">White logo on black</p>
+                    </div>
+                </div>
+                <div class="logo-display on-white">
+                    <div class="text-center">
+                        <div style="width: 120px; height: 120px; background-color: #FFFFFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #1A1A1A; margin: 0 auto 1rem;">
+                            <span class="display-font text-gray-900 text-4xl">VF</span>
+                        </div>
+                        <p class="text-gray-900 text-xs tracking-widest font-medium">CONSTRUCCIONES</p>
+                        <p class="text-gray-500 text-xs mt-2">Black logo on white</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guideline-card mt-8">
+                <h4 class="text-white font-semibold mb-4">Logo Usage Guidelines</h4>
+                <ul class="text-gray-300 space-y-2">
+                    <li>Minimum size: 40px height</li>
+                    <li>Always use on solid backgrounds (black or white)</li>
+                    <li>Maintain clear space equal to 1/4 of the mark's width on all sides</li>
+                    <li>Do not stretch, distort, or rotate the logo</li>
+                    <li>Use white on dark backgrounds, black on light backgrounds</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Color Palette Section -->
+        <section class="mb-16">
+            <h2 class="text-white mb-8">Color Palette</h2>
+            <p class="text-gray-300 mb-8 max-w-3xl text-base leading-relaxed">Our color system is rooted in architectural materials and natural elements. The palette emphasizes contrast with neutral tones, allowing accent colors to highlight key moments. <span class="accent-highlight">Click any swatch to copy the hex code.</span></p>
+
+            <div class="space-y-12">
+                <!-- Core Colors -->
+                <div>
+                    <h3 class="text-gray-200 text-sm font-semibold uppercase tracking-widest mb-6">Core Colors</h3>
+                    <div class="color-grid">
+                        <div onclick="copyColor('#1A1A1A')">
+                            <div class="color-swatch" style="background-color: #1A1A1A; height: 120px; border: 1px solid #2D2D2D;"></div>
+                            <p class="color-label text-white">Primary Black</p>
+                            <p class="color-hex">#1A1A1A</p>
+                        </div>
+                        <div onclick="copyColor('#FFFFFF')">
+                            <div class="color-swatch" style="background-color: #FFFFFF; height: 120px; border: 1px solid #E0E0E0;"></div>
+                            <p class="color-label text-white">Pure White</p>
+                            <p class="color-hex">#FFFFFF</p>
+                        </div>
+                        <div onclick="copyColor('#F5F5F5')">
+                            <div class="color-swatch" style="background-color: #F5F5F5; height: 120px; border: 1px solid #E0E0E0;"></div>
+                            <p class="color-label text-gray-900">Light Grey</p>
+                            <p class="color-hex">#F5F5F5</p>
+                        </div>
+                        <div onclick="copyColor('#2D2D2D')">
+                            <div class="color-swatch" style="background-color: #2D2D2D; height: 120px; border: 1px solid #3D3D3D;"></div>
+                            <p class="color-label text-white">Charcoal Grey</p>
+                            <p class="color-hex">#2D2D2D</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Colors -->
+                <div>
+                    <h3 class="text-gray-200 text-sm font-semibold uppercase tracking-widest mb-6">Secondary Colors</h3>
+                    <div class="color-grid">
+                        <div onclick="copyColor('#6B6B6B')">
+                            <div class="color-swatch" style="background-color: #6B6B6B; height: 120px; border: 1px solid #7B7B7B;"></div>
+                            <p class="color-label text-white">Medium Grey</p>
+                            <p class="color-hex">#6B6B6B</p>
+                        </div>
+                        <div onclick="copyColor('#A8A098')">
+                            <div class="color-swatch" style="background-color: #A8A098; height: 120px; border: 1px solid #B8B8B8;"></div>
+                            <p class="color-label text-gray-900">Warm Concrete</p>
+                            <p class="color-hex">#A8A098</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accent Colors -->
+                <div>
+                    <h3 class="text-gray-200 text-sm font-semibold uppercase tracking-widest mb-6">Accent Colors</h3>
+                    <div class="color-grid">
+                        <div onclick="copyColor('#4DB8C7')">
+                            <div class="color-swatch" style="background-color: #4DB8C7; height: 120px; border: 1px solid #5DC8D7;"></div>
+                            <p class="color-label text-gray-900">Pool Blue</p>
+                            <p class="color-hex">#4DB8C7</p>
+                        </div>
+                        <div onclick="copyColor('#5A8C3C')">
+                            <div class="color-swatch" style="background-color: #5A8C3C; height: 120px; border: 1px solid #6A9C4C;"></div>
+                            <p class="color-label text-white">Grass Green</p>
+                            <p class="color-hex">#5A8C3C</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guideline-card mt-8">
+                <h4 class="text-white font-semibold mb-4">Color Usage</h4>
+                <ul class="text-gray-300 space-y-2">
+                    <li>Black, white, and grey dominate the primary palette</li>
+                    <li>Accent colors (pool blue, grass green) used sparingly for CTAs and highlights only</li>
+                    <li>Warm concrete grounds the palette in architectural materials</li>
+                    <li>Maintain high contrast for accessibility across all combinations</li>
+                    <li>Use color intentionally to guide user focus</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Typography Section -->
+        <section class="mb-16">
+            <h2 class="text-white mb-8">Typography</h2>
+            <p class="text-gray-300 mb-10 max-w-3xl text-base leading-relaxed">We pair elegant serif display type with clean, modern sans-serif body text. This combination creates an upscale, architectural feel while maintaining readability across all platforms.</p>
+
+            <div class="space-y-10">
+                <!-- Display Font -->
+                <div>
+                    <h3 class="text-gray-200 text-sm font-semibold uppercase tracking-widest mb-6">Display / Headings</h3>
+                    <div class="typography-sample">
+                        <p class="display-font text-5xl text-white mb-2">Cormorant Garamond</p>
+                        <p class="text-gray-400 text-sm mb-6">Serif typeface, weights 400–700</p>
+                        <div class="space-y-4 pt-6 border-t border-gray-800">
+                            <p class="display-font text-4xl text-white">Proyectos Destacados</p>
+                            <p class="display-font text-2xl text-gray-300">Elegancia en cada detalle</p>
+                            <p class="display-font text-lg text-gray-400 italic">Construyendo tu visión</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Font -->
+                <div>
+                    <h3 class="text-gray-200 text-sm font-semibold uppercase tracking-widest mb-6">Body Text</h3>
+                    <div class="typography-sample">
+                        <p class="body-font text-base text-white mb-2 font-medium">Inter</p>
+                        <p class="text-gray-400 text-sm mb-6">Sans-serif typeface, weights 300–700</p>
+                        <div class="space-y-4 pt-6 border-t border-gray-800">
+                            <p class="body-font text-base text-gray-200 leading-relaxed">Somos una empresa constructora especializada en proyectos residenciales de lujo en Nordelta. Nuestro enfoque integral combina diseño innovador con ejecución impecable.</p>
+                            <p class="body-font text-sm text-gray-400">17 años de experiencia transformando espacios en Nordelta, Buenos Aires.</p>
+                            <p class="body-font text-xs text-gray-500 uppercase tracking-widest">20+ Proyectos Completados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typography Pairing -->
+                <div>
+                    <h3 class="text-gray-200 text-sm font-semibold uppercase tracking-widest mb-6">Pairing Example</h3>
+                    <div class="typography-sample">
+                        <p class="display-font text-3xl text-white mb-3">Viviendas de Lujo</p>
+                        <p class="body-font text-base text-gray-300 leading-relaxed">Cada proyecto es una expresión única de arquitectura contemporánea. Combinamos espacios generosos, materiales premium, y detalles que elevan el estándar de la construcción residencial en Nordelta.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guideline-card mt-8">
+                <h4 class="text-white font-semibold mb-4">Typography Standards</h4>
+                <ul class="text-gray-300 space-y-2">
+                    <li>Display headings: Cormorant Garamond, weight 600, tracking -0.03em</li>
+                    <li>Body text: Inter, weight 400, line-height 1.7</li>
+                    <li>Minimum font size for body: 16px on mobile, 16px on desktop</li>
+                    <li>Headings on mobile should be reduced 30-40% from desktop</li>
+                    <li>Line length should not exceed 75 characters for optimal readability</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Brand Guidelines Section -->
+        <section class="mb-16">
+            <h2 class="text-white mb-8">Brand Guidelines</h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4 flex items-center">
+                        <span class="accent-highlight mr-2">●</span> Logo Placement
+                    </h4>
+                    <ul class="text-gray-300 space-y-2 text-sm">
+                        <li>Primary position: top-left or center of layouts</li>
+                        <li>Always maintain clear space (1/4 of mark width)</li>
+                        <li>Use solid background: black (#1A1A1A) or white (#FFFFFF)</li>
+                        <li>Never place on textured or photographic backgrounds</li>
+                        <li>Minimum reproduction size: 40px height</li>
+                    </ul>
+                </div>
+
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4 flex items-center">
+                        <span class="accent-highlight mr-2">●</span> Voice & Tone
+                    </h4>
+                    <ul class="text-gray-300 space-y-2 text-sm">
+                        <li>Professional yet approachable</li>
+                        <li>Emphasize quality and attention to detail</li>
+                        <li>Confident without being arrogant</li>
+                        <li>Use clear, direct language (avoid jargon)</li>
+                        <li>Highlight craftsmanship and experience</li>
+                    </ul>
+                </div>
+
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4 flex items-center">
+                        <span class="accent-highlight mr-2">●</span> Spacing & Layout
+                    </h4>
+                    <ul class="text-gray-300 space-y-2 text-sm">
+                        <li>Use consistent spacing tokens throughout</li>
+                        <li>Desktop sections: 120-160px vertical padding</li>
+                        <li>Mobile sections: 60-80px vertical padding</li>
+                        <li>Create intentional visual hierarchy with whitespace</li>
+                        <li>Grid-based layouts for visual coherence</li>
+                    </ul>
+                </div>
+
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4 flex items-center">
+                        <span class="accent-highlight mr-2">●</span> Interactive States
+                    </h4>
+                    <ul class="text-gray-300 space-y-2 text-sm">
+                        <li>Hover: +4px transform lift, color shift to accent blue</li>
+                        <li>Focus-visible: accent border, clear outline</li>
+                        <li>Active: subtle scale down, color darkening</li>
+                        <li>Disabled: reduced opacity (50%), no interaction</li>
+                        <li>Transitions: use transform & opacity only (no transition-all)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Photography & Imagery Section -->
+        <section class="mb-16">
+            <h2 class="text-white mb-8">Photography & Imagery</h2>
+            <p class="text-gray-300 mb-8 max-w-3xl text-base leading-relaxed">Our photography style showcases architectural excellence and refined living spaces. Images should highlight craftsmanship, materiality, and the transformative power of our work.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4">Photography Style</h4>
+                    <ul class="text-gray-300 space-y-2">
+                        <li>High contrast compositions with strong lighting</li>
+                        <li>Clean, architectural perspectives</li>
+                        <li>Focus on material detail and texture</li>
+                        <li>Natural light preferred; minimize harsh shadows</li>
+                        <li>Consistent color grading (neutral to warm tones)</li>
+                        <li>People (when featured) should appear natural and contemplative</li>
+                    </ul>
+                </div>
+
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4">Image Treatments</h4>
+                    <ul class="text-gray-300 space-y-2">
+                        <li>Gradient overlay: <code style="color: #4DB8C7;">bg-gradient-to-t from-black/60</code></li>
+                        <li>Color treatment: blend-multiply for muted, sophisticated tone</li>
+                        <li>Aspect ratios: 16:9 for hero images, 4:3 for cards</li>
+                        <li>Never allow images to overflow viewport on mobile</li>
+                        <li>Scale proportionally across breakpoints</li>
+                    </ul>
+                </div>
+
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4">Subject Matter</h4>
+                    <ul class="text-gray-300 space-y-2">
+                        <li>Interior spaces: living areas, kitchens, bedrooms, bathrooms</li>
+                        <li>Exterior facades and landscaping details</li>
+                        <li>Poolside areas and outdoor entertainment spaces</li>
+                        <li>Construction process (refined, not chaotic)</li>
+                        <li>Material close-ups: wood, stone, tile, concrete finishes</li>
+                    </ul>
+                </div>
+
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4">What to Avoid</h4>
+                    <ul class="text-gray-300 space-y-2">
+                        <li>Overly saturated or unrealistic colors</li>
+                        <li>Cluttered or poorly composed shots</li>
+                        <li>Low-quality or blurry images</li>
+                        <li>Stock photography (appearance of generic content)</li>
+                        <li>Over-processed or heavily filtered looks</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Responsive Design Section -->
+        <section class="mb-16">
+            <h2 class="text-white mb-8">Responsive Design</h2>
+            <p class="text-gray-300 mb-8 max-w-3xl text-base leading-relaxed">Our brand experience must be seamless across all devices. Mobile-first design ensures accessibility and performance for every user.</p>
+
+            <div class="space-y-6">
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4">Breakpoints</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="text-accent-highlight font-mono">375px</p>
+                            <p class="text-gray-400">Mobile</p>
+                        </div>
+                        <div>
+                            <p class="text-accent-highlight font-mono">768px</p>
+                            <p class="text-gray-400">Tablet</p>
+                        </div>
+                        <div>
+                            <p class="text-accent-highlight font-mono">1024px</p>
+                            <p class="text-gray-400">Desktop</p>
+                        </div>
+                        <div>
+                            <p class="text-accent-highlight font-mono">1440px</p>
+                            <p class="text-gray-400">Large Desktop</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guideline-card">
+                    <h4 class="text-white font-semibold mb-4">Mobile Requirements</h4>
+                    <ul class="text-gray-300 space-y-2">
+                        <li>Navigation: hamburger menu or bottom navigation on screens &lt; 768px</li>
+                        <li>Typography: reduce heading sizes 30-40% from desktop</li>
+                        <li>Body text: minimum 16px for readability</li>
+                        <li>Touch targets: all clickable elements 44x44px minimum</li>
+                        <li>Images: scale down proportionally, never overflow viewport</li>
+                        <li>Horizontal scroll: strictly prohibited</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Footer -->
+        <section class="text-center py-12 border-t border-gray-800">
+            <p class="text-gray-500 text-sm tracking-widest uppercase">VF Construcciones</p>
+            <p class="text-gray-600 text-xs mt-2">Brand Identity Guide — March 2026</p>
+        </section>
+    </main>
+
+    <script>
+        function copyColor(hex) {
+            navigator.clipboard.writeText(hex).then(() => {
+                const feedback = document.getElementById('copyFeedback');
+                feedback.textContent = `Copied ${hex}`;
+                feedback.classList.add('show');
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

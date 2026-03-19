@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "puppeteer": "^24.39.1"
+    "puppeteer": "^24.39.1",
+    "uipro-cli": "^2.2.3"
   }
 }

@@ -4,6 +4,19 @@
 
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 
+## Auto-Setup (run once per new project)
+
+On first session, before doing anything else, check if this project has been set up.
+If any of these are missing, install them silently:
+- `node_modules/puppeteer` → `npm i puppeteer`
+- `serve.mjs` / `screenshot.mjs` → copy from `../website-es-por-ai/`
+- `.agents/skills/` → `npx skills add coreyhaines31/marketingskills`
+- `.claude/skills/ui-ux-pro-max` → `npm install uipro-cli && npx uipro init --ai claude`
+- `.agents/skills/stitch-design` → `npx skills add google-labs-code/stitch-skills --skill stitch-design`
+- `brand_assets/`, `docs/`, `.gitignore` → create if missing
+
+Only install what's missing. Confirm what was set up, then proceed.
+
 ## Reference Images
 
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
@@ -19,13 +32,13 @@
 
 ## Screenshot Workflow
 
-- Puppeteer is installed at `C:/Users/nateh/AppData/Local/Temp/puppeteer-test/`. Chrome cache is at `C:/Users/nateh/.cache/puppeteer/`.
+- Puppeteer is installed via npm in the project (`node_modules/`). No custom paths needed.
 - **Always screenshot from localhost:** `node screenshot.mjs http://localhost:3000`
-- Screenshots are saved automatically to `./temporary screenshots/screenshot-N.png` (auto-incremented, never overwritten).
+- Screenshots are saved automatically to `./temporary screenshots/screenshot-N.png`
 - Optional label suffix: `node screenshot.mjs http://localhost:3000 label` → saves as `screenshot-N-label.png`
 - `screenshot.mjs` lives in the project root. Use it as-is.
-- After screenshotting, read the PNG from `temporary screenshots/` with the Read tool — Claude can see and analyze the image directly.
-- When comparing, be specific: "heading is 32px but reference shows ~24px", "card gap is 16px but should be 24px"
+- After screenshotting, read the PNG from `temporary screenshots/` with the Read tool
+- When comparing, be specific: "heading is 32px but reference shows ~24px"
 - Check: spacing/padding, font size/weight/line-height, colors (exact hex), alignment, border-radius, shadows, image sizing
 
 ## Output Defaults
