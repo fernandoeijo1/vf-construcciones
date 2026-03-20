@@ -685,6 +685,34 @@
         .pt-120 { padding-top: 120px; }
         .pb-120 { padding-bottom: 120px; }
 
+        /* ─── HERO TOP GRID ──────────────────────────────────── */
+        .hero-top-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 60px;
+            align-items: end;
+        }
+
+        /* ─── HERO IMAGE WRAP ────────────────────────────────── */
+        .hero-img-wrap {
+            width: 100%;
+            overflow: hidden;
+            aspect-ratio: 16/7;
+        }
+
+        /* ─── VALUES STICKY COL ──────────────────────────────── */
+        .values-sticky-col {
+            position: sticky;
+            top: 120px;
+        }
+
+        /* ─── FORM PAIR ROW ──────────────────────────────────── */
+        .form-pair-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 32px;
+        }
+
         /* ─── RESPONSIVE ─────────────────────────────────────── */
         @media (max-width: 1200px) {
             :root {
@@ -712,32 +740,52 @@
             .section-grid { grid-template-columns: 160px 1fr; gap: 48px; }
             .values-inner { grid-template-columns: 1fr; }
             .values-headline { position: static; max-width: 100%; }
+            .values-sticky-col { position: static; }
         }
 
         @media (max-width: 768px) {
             :root {
-                --fs-hero: 3.2rem;
-                --lh-hero: 3.6rem;
-                --fs-h2:   2.4rem;
-                --lh-h2:   3rem;
-                --fs-body: 1.15rem;
-                --lh-body: 1.8rem;
+                --fs-hero: 2.8rem;
+                --lh-hero: 3.2rem;
+                --fs-h2:   2.2rem;
+                --lh-h2:   2.7rem;
+                --fs-body: 1.05rem;
+                --lh-body: 1.7rem;
             }
-            .wrap { padding: 0 28px; }
-            nav { padding: 0px 28px; }
+            .wrap { padding: 0 24px; }
+            nav { padding: 0px 24px; }
             .nav-links { display: none; }
             .burger { display: flex; }
+            .nav-logo { height: 56px; width: 56px; }
             .section-grid { grid-template-columns: 1fr; gap: 16px; }
-            #hero { padding: 120px 0 0; }
+            #hero { padding: 96px 0 0; }
+            .hero-top-grid { grid-template-columns: 1fr; gap: 20px; }
+            .hero-img-wrap { aspect-ratio: 4/3; }
+            .values-sticky-col { position: static; }
+            .values-photo { display: none; }
+            .form-pair-row { grid-template-columns: 1fr; }
+            .mt-40 { margin-top: 24px; }
+            .mt-56 { margin-top: 32px; }
+            .mt-80 { margin-top: 40px; }
+            .mt-120 { margin-top: 56px; }
+            .pt-120 { padding-top: 60px; }
+            .pb-120 { padding-bottom: 60px; }
+            #values { padding: 60px 0; }
+            .values-inner { gap: 32px; }
+            .historia-split { grid-template-columns: 1fr; gap: 32px; }
+            .historia-split-img { min-height: unset; aspect-ratio: 16/9; height: auto; }
             .leadership-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
             .leadership-grid.three-col { grid-template-columns: 1fr; }
             .footer-row { flex-direction: column; align-items: flex-start; gap: 16px; }
             .footer-nav { flex-wrap: wrap; gap: 16px; }
             .footer-right { flex-wrap: wrap; gap: 12px; }
-.ornament-divider { gap: 40px; }
-            .historia-split { grid-template-columns: 1fr; gap: 32px; }
-            .historia-split-img { min-height: unset; aspect-ratio: 16/9; height: auto; }
-            .values-photo { display: none; }
+            .ornament-divider { gap: 40px; }
+            .projects-editorial { grid-template-rows: repeat(3, 55vw); }
+            #cta { padding: 60px 0 80px; }
+            .cta-inner { padding-top: 48px; }
+            .cta-btn { width: 52px; height: 52px; }
+            .approach-title { font-size: 1.8rem; line-height: 2.2rem; }
+            .approach-body { font-size: 1rem; line-height: 1.65rem; }
         }
     </style>
 </head>
@@ -774,7 +822,7 @@
 <section id="hero">
     <div class="wrap">
         <!-- Row: heading left + body text right -->
-        <div style="display:grid; grid-template-columns: 1fr 340px; gap: 60px; align-items: end;">
+        <div class="hero-top-grid">
             <div>
                 <h1 class="hero-heading">
                     Diseñamos y construimos<br>
@@ -799,7 +847,7 @@
     </div>
 
     <!-- Full-width hero image -->
-    <div class="mt-56" style="aspect-ratio:16/7; width:100%; overflow:hidden;">
+    <div class="mt-56 hero-img-wrap">
         <img src="brand_assets/lote-143/lote-143-1.jpeg" alt="VF Construcciones — Barrio Tipas, Nordelta" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
     </div>
 </section>
@@ -894,7 +942,7 @@
         <div class="values-inner mt-80">
 
             <!-- Left: sticky headline + project photo -->
-            <div style="position:sticky; top:120px;">
+            <div class="values-sticky-col">
                 <h2 class="values-headline" style="position:static; top:auto;">
                     Cada obra nace de una base <em>sólida.</em>
                 </h2>
@@ -1139,7 +1187,7 @@
                 </h2>
 
                 <form onsubmit="return false;" style="display:flex; flex-direction:column; gap:0;">
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 32px;">
+                    <div class="form-pair-row">
                         <input type="text" placeholder="Nombre completo" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.12); padding:16px 0; font-family:'Inter',sans-serif; font-size:1rem; color:rgba(255,255,255,0.75); outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='#BA5B3F'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
                         <input type="tel" placeholder="Teléfono" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.12); padding:16px 0; font-family:'Inter',sans-serif; font-size:1rem; color:rgba(255,255,255,0.75); outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='#BA5B3F'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
                     </div>
